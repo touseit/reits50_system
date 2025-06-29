@@ -60,4 +60,12 @@ endif()
 
 # 添加测试
 enable_testing()
-add_test(NAME SystemTest COMMAND REITsIndexSystem --test)
+
+file(GLOB UNIT_TESTS tests/unit/*.cpp)
+file(GLOB INTEGRATION_TESTS tests/integration/*.cpp)
+add_executable(run_unit_tests ${UNIT_TESTS})
+target_link_libraries(run_unit_tests PRIVATE ...)
+add_executable(run_integration_tests ${INTEGRATION_TESTS})
+target_link_libraries(run_integration_tests PRIVATE ...)
+add_test(NAME UnitTests COMMAND run_unit_tests)
+add_test(NAME IntegrationTests COMMAND run_integration_tests)
